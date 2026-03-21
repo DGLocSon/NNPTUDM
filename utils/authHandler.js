@@ -15,13 +15,16 @@ module.exports = {
         }
 
         try {
-            
-            const publicKey = fs.readFileSync(path.join(__dirname, '../public.pem'), 'utf8');
-            let decoded = jwt.verify(token, publicKey, { algorithms: ['RS256'] });
 
-            let user = await userController.GetUserById(decoded.id);
+            let result = jwt.verify(key, 'secretKey')
+            if (result.exp * 1000 < Date.now()) {
+                res.status(404).send("ban chua dang nhap")
+                return; s
+            }
+            let user = await userController.GetUserById(result.id);
             if (!user) {
-                return res.status(404).send("ban chua dang nhap")
+                res.status(404).send("ban chua dang nhap")
+                return;
             }
             req.user = user;
             next();
@@ -30,5 +33,16 @@ module.exports = {
             return;
         }
 
+    },
+    CheckRole: function (requiredRole) {
+        return function (req, res, next) {
+            let user = req.user;
+            let currentRole = user.role.name;
+            if (requiredRole.includes(currentRole)) {
+                next()
+            } else {
+                res.status(403).send("ban khong co quyen")
+            }
+        }
     }
 }
