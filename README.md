@@ -3,3 +3,4 @@
 
 * **Tạo file:** Tạo file mới tên là `.env`.
 * **Điền tài khoản:** MAIL_USER= và MAIL_PASS=
+* 300000ms upload
