@@ -1,19 +1,19 @@
+require('dotenv').config();
 const nodemailer = require("nodemailer");
 
 
-const transporter = nodemailer.createTransport({
-    host: "sandbox.smtp.mailtrap.io",
-    port: 25,
-    secure: false, // Use true for port 465, false for port 587
-    auth: {
-        user: "afb860a426d68e",
-        pass: "d3964b7baf52ff",
-    },
+var transport = nodemailer.createTransport({
+  host: "sandbox.smtp.mailtrap.io",
+  port: 2525,
+  auth: {
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS
+  }
 });
 
 module.exports = {
     sendMail: async (to,url) => {
-        const info = await transporter.sendMail({
+        const info = await transport.sendMail({
             from: 'Admin@hahah.com',
             to: to,
             subject: "request resetpassword email",
