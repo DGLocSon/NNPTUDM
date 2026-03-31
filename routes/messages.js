@@ -3,15 +3,20 @@ let router = express.Router();
 let mongoose = require('mongoose');
 let Message = require('../schemas/messages');
 let { CheckLogin } = require('../utils/authHandler')
+let { uploadImage } = require('../utils/uploadHandler')
 
-
-router.post('/', CheckLogin, async (req, res) => {
+router.post('/', CheckLogin, uploadImage.single('file'), async (req, res) => {
     try {
         let user = req.user;
         let fromUser = user._id;
         let toUser = req.body.to;
         let type = req.body.type;
-        let text = req.body.text;
+        let text = "";
+        if (req.file) {
+            text = req.file.path;
+        } else {
+            text = req.body.text;
+        }
         let newMessage = new Message({
             from: fromUser,
             to: toUser,

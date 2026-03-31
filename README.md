@@ -1,5 +1,6 @@
 # Đỗ Gia Lộc Sơn - 2280602746
 # Cấu hình Hệ thống Gửi Email (Mailtrap)
 
-* **Tạo file:** Tạo file mới tên là `.env` (nhớ có dấu chấm ở đầu).
+* **Tạo file:** Tạo file mới tên là `.env`.
 * **Điền tài khoản:** MAIL_USER= và MAIL_PASS=
+* 300000ms upload
