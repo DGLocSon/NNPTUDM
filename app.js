@@ -8,7 +8,6 @@ let mongoose = require('mongoose')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
 var app = express();
 
 // view engine setup
@@ -29,6 +28,7 @@ app.use('/api/v1/roles', require('./routes/roles'));
 app.use('/api/v1/auth', require('./routes/auth'));
 app.use('/api/v1/carts', require('./routes/carts'));
 app.use('/api/v1/upload', require('./routes/uploads'));
+app.use('/api/v1/messages', require('./routes/messages'));
 
 mongoose.connect('mongodb://localhost:27017/NNPTUD-S3');
 mongoose.connection.on('connected', function () {
