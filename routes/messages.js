@@ -63,7 +63,6 @@ router.get('/', CheckLogin, async (req, res) => {
 
             let otherUser = (fromStr === myIdStr) ? toStr : fromStr;
 
-            // Nếu người này chưa có trong danh sách thì thêm vào
             if (listUserChatted.includes(otherUser) === false) {
                 listUserChatted.push(otherUser);
                 result.push(msg);
