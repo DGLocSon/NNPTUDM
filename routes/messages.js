@@ -10,11 +10,13 @@ router.post('/', CheckLogin, uploadImage.single('file'), async (req, res) => {
         let user = req.user;
         let fromUser = user._id;
         let toUser = req.body.to;
-        let type = req.body.type;
+        let type = "";
         let text = "";
         if (req.file) {
+            type = 'file';
             text = req.file.path;
         } else {
+            type = 'text';
             text = req.body.text;
         }
         let newMessage = new Message({
